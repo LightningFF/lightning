@@ -1,4 +1,6 @@
+require_dependency "lightning/application_controller"
+
 module Lightning
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
   end
 end

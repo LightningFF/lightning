@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Features</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Key</th>
+    <th>Description</th>
+    <th>State</th>
+    <th>Created</th>
+    <th>Updated</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @features.each do |feature| %>
+    <tr>
+      <td><%= feature.key %></td>
+      <td><%= feature.description %></td>
+      <td><%= feature.state %></td>
+      <td><%= feature.created_at %></td>
+      <td><%= feature.updated_at %></td>
+      <td><%= link_to 'Show', feature %></td>
+      <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
+      <td><%= button_to 'Destroy', feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<br>
+
+<%= link_to 'New Feature', new_feature_path %>

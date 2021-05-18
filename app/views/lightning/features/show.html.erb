@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @feature.key %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @feature.description %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @feature.state %>
+</p>
+
+
+<p>
+  <strong>Created:</strong>
+  <%= @feature.created_at %>
+</p>
+
+<p>
+  <strong>Updated:</strong>
+  <%= @feature.updated_at %>
+</p>
+
+
+<h3>Opt In Accounts</h3>
+<%= render @feature.feature_opt_ins %>
+<%= render "lightning/feature_opt_ins/form" %>
+<br/>
+
+<%= link_to 'Edit', edit_feature_path(@feature) %> |
+<%= link_to 'Back', features_path %>

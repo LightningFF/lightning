@@ -13,6 +13,16 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 
+# Ignore files in the test directory
+test/dummy/tmp/
+test/dummy/log/
+!test/dummy/tmp/.keep
+!test/dummy/log/.keep
+test/dummy/db/*.sqlite3
+test/dummy/db/*.sqlite3-journal
+test/dummy/db/*.sqlite3-[0-9]*
+
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

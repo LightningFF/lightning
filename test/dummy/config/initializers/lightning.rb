@@ -1,0 +1,1 @@
+Lightning.entity_class = "User"

@@ -6,6 +6,8 @@ gemspec
 
 group :development do
   gem 'sqlite3'
+  # Use Puma as the app server
+  gem 'puma', '~> 5.0'
 end
 
 # To use a debugger
