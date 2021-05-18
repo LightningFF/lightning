@@ -1,4 +1,4 @@
 <div>
   <%= feature_opt_in.entity.id %>
-  <%= (feature_opt_in.entity.respond_to? :ff_display) ? "- #{feature_opt_in.entity.ff_display}" : ""  %>
+  <%= "- #{feature_opt_in.entity.ff_display}"  %>
   <%= button_to 'Destroy', [feature_opt_in.feature, feature_opt_in], method: :delete, data: { confirm: 'Are you sure?' } %></div>

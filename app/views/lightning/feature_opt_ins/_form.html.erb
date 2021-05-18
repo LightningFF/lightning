@@ -2,7 +2,7 @@
 <%= form_with model: [@feature, @feature.feature_opt_ins.build] do |form| %>
   <p>
     <%= form.label :entity, 'Select Account' %><br>
-    <%= form.select :entity, options_for_select(@users.map {|u| [ (u.respond_to? :ff_display) ? u.ff_display : u.id, [u.id, u.class.to_s] ] }) %>
+    <%= form.select :entity, options_for_select(@users.map {|u| [ u.ff_display, [u.id, u.class.to_s] ] }) %>
   </p>
   <%= form.submit 'Add account to feature' %>
 <% end %>

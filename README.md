@@ -1,25 +1,30 @@
 # Lightning
-Short description and motivation.
+Set up a feature flagging system in <1 minute.
 
-## Usage
+## Getting Started
 How to use my plugin.
 
+* Add gem to your application's Gemfile: `gem 'lightning'`
 * `bundle install`
 * `bin/rails lightning:install:migrations`
 * `bin/rails db:migrate SCOPE=lightning`
-* Add a file under `config/initializers/lightning.rb` with the following line: `Lightning.entity_class = "User"`
-* Add method for display
-
+* Create the file `config/initializers/lightning.rb` and populate it with your flaggable entities (i.e. `Lightning.flaggable_entities = ["User", "Workspace"]`)
+* Include the following module for each flaggable model: `include Lightning::Flaggable`. Example below
 ```ruby
-  def ff_display
-    self.name
-  end
+class User < ApplicationRecord
+  include Lightning::Flaggable
+end
 ```
+* Check feature availability for account: `Lightning::Feature.enabled_for?(user, 'homepage_v2')`
 
-* Check feature availability for account: `Lightning::Feature.has_feature(user, 'homepage_v2')`
+## Functionality
+* Easy-to-use UI that allows creating, modifying, and deleting features and permissioning accounts to those features
+* Highly configurable options to display data on the UI
+* Console API to manage features and permissions without any UI
 
-## Rails Console Usage
-### Features
+
+## Rails Console API
+### Feature Management
 * Create Feature: `Lightning::Feature.create(<key>, <description>, <state>)` where state is one of three options: `[:inactive, :enabled_globally, :enabled_per_entity]`
 * Find feature by key: `Lightning::Feature.find_by_key(<key>)`
 * Update feature description: `@feature.set_description(<description>)`
@@ -28,29 +33,16 @@ How to use my plugin.
     - Enable globally: `@feature.enabled_globally!`
     - Enable per entity: `@feature.enabled_per_entity!`
 * Delete feature: `Lightning::Feature.delete(<key>)`
-### Feature Permissions/Opt Ins
+### Feature Permissions/Opt Ins Management
 * Add account to feature: `@feature.add_account(<account>)`
 * List accounts for feature: `@feature.accounts`
 * Check if feature is enabled for account at feature level: `@feature.enabled_for?(<account>)`
 * Check if feature is enabled for account at class level: `Lightning::Feature.enabled_for?(<account>, <key>)`
 * Remove account access to feature: `@feature.remove(<account>)`
 
-## Installation
-Add this line to your application's Gemfile:
+## Advanced Configuration
 
-```ruby
-gem 'lightning'
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install lightning
-```
+Lightning makes is super easy to configure how data is represented through the UI. 
 
 ## Contributing
 Contribution directions go here.
