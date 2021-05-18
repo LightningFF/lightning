@@ -1,1 +1,1 @@
-Lightning.entity_class = "User"
+Lightning.flaggable_entities = ["User", "Workspace"]

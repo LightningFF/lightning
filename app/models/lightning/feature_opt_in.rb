@@ -3,13 +3,13 @@ module Lightning
     belongs_to :feature
 
     attr_accessor :entity_id
-    belongs_to :entity, class_name: Lightning.entity_class.to_s
 
+    belongs_to :entity, polymorphic: true
     before_validation :set_entity
 
     private
     def set_entity
-      self.entity = Lightning.entity_class.find(entity_id)
+      self.entity = self.entity_type.constantize.find(self.entity_id)
     end
 
   end

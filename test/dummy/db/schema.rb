@@ -36,4 +36,10 @@ ActiveRecord::Schema.define(version: 2021_05_17_164901) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "workspaces", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end

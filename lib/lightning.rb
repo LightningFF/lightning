@@ -3,9 +3,9 @@ require "lightning/engine"
 
 module Lightning
   # Your code goes here...
-  mattr_accessor :entity_class
+  mattr_accessor :flaggable_entities
 
-  def self.entity_class
-    @@entity_class.constantize
+  def self.flaggable_entities
+    @@flaggable_entities.map{ |f| f.constantize }
   end
 end
