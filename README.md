@@ -1,4 +1,4 @@
-# Lightning
+# ⚡️ Lightning
 Set up an end-to-end feature flagging system in <1 minute.
 
 ## Getting Started
