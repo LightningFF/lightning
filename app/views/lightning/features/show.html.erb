@@ -18,12 +18,12 @@
 
 <p>
   <strong>Created:</strong>
-  <%= @feature.created_at %>
+  <%= @feature.created_at.to_formatted_s(:long) %>
 </p>
 
 <p>
   <strong>Updated:</strong>
-  <%= @feature.updated_at %>
+  <%= @feature.updated_at.to_formatted_s(:long) %>
 </p>
 
 

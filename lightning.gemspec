@@ -3,11 +3,11 @@ require_relative "lib/lightning/version"
 Gem::Specification.new do |spec|
   spec.name        = "lightning"
   spec.version     = Lightning::VERSION
-  spec.authors     = ["Ruthwick Pathireddy"]
-  spec.email       = ["ruthwickp@gmail.com"]
-  spec.homepage    = "https://google.com"
-  spec.summary     = "Summary of Lightning."
-  spec.description = "Description of Lightning."
+  spec.authors     = ["Ruthwick Pathireddy", "Pranav Singh"]
+  spec.email       = ["ruthwickp@gmail.com", "pranav@getcadet.com"]
+  spec.homepage    = "https://github.com/LightningFF/lightning"
+  spec.summary     = "Feature flagging for Rails"
+  spec.description = "With Lightning, you can set up an end-to-end highly customizable feature flagging system in <1 minute. It provides console and UI support for feature flag management."
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

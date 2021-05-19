@@ -20,8 +20,8 @@
       <td><%= feature.key %></td>
       <td><%= feature.description %></td>
       <td><%= feature.state %></td>
-      <td><%= feature.created_at %></td>
-      <td><%= feature.updated_at %></td>
+      <td><%= feature.created_at.to_formatted_s(:long) %></td>
+      <td><%= feature.updated_at.to_formatted_s(:long) %></td>
       <td><%= link_to 'Show', feature %></td>
       <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
       <td><%= button_to 'Destroy', feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>

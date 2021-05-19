@@ -1,5 +1,5 @@
 # Lightning
-Set up a feature flagging system in <1 minute.
+Set up an end-to-end feature flagging system in <1 minute.
 
 ## Getting Started
 How to use my plugin.
@@ -16,6 +16,7 @@ class User < ApplicationRecord
 end
 ```
 * Check feature availability for account: `Lightning::Feature.enabled_for?(user, 'homepage_v2')`
+* To manage feature flags through the UI, add the following to your applications routes.rb file where `"lightning"` can be any route you define:`mount Lightning::Engine => "/lightning"`
 
 ## Functionality
 * Easy-to-use UI that allows creating, modifying, and deleting features and permissioning accounts to those features
