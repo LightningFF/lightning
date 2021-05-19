@@ -15,11 +15,11 @@ class User < ApplicationRecord
   include Lightning::Flaggable
 end
 ```
-* Check feature availability for account: `Lightning::Feature.enabled_for?(user, 'homepage_v2')`
+* Check feature availability for entity: `Lightning::Feature.enabled_for?(user, 'homepage_v2')`
 * To manage feature flags through the UI, add the following to your applications routes.rb file where `"lightning"` can be any route you define:`mount Lightning::Engine => "/lightning"`
 
 ## Functionality
-* Easy-to-use UI that allows creating, modifying, and deleting features and permissioning accounts to those features
+* Easy-to-use UI that allows creating, modifying, and deleting features and permissioning entities to those features
 * Highly configurable options to display data on the UI
 * Console API to manage features and permissions without any UI
 
@@ -35,11 +35,11 @@ end
     - Enable per entity: `@feature.enabled_per_entity!`
 * Delete feature: `Lightning::Feature.delete(<key>)`
 ### Feature Permissions/Opt Ins Management
-* Add account to feature: `@feature.add_account(<account>)`
-* List accounts for feature: `@feature.accounts`
-* Check if feature is enabled for account at feature level: `@feature.enabled_for?(<account>)`
-* Check if feature is enabled for account at class level: `Lightning::Feature.enabled_for?(<account>, <key>)`
-* Remove account access to feature: `@feature.remove(<account>)`
+* Add entity to feature: `@feature.add_entity(<entity>)`
+* List entities for feature: `@feature.entities`
+* Check if feature is enabled for entity at feature level: `@feature.enabled_for?(<entity>)`
+* Check if feature is enabled for entity at class level: `Lightning::Feature.enabled_for?(<entity>, <key>)`
+* Remove entity access to feature: `@feature.remove(<entity>)`
 
 ## Advanced Configuration
 

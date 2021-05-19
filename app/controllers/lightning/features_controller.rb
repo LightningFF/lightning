@@ -11,7 +11,7 @@ module Lightning
     #
     # GET /features/1
     def show
-      @users = Lightning.flaggable_entities.map{ |e| e.all }.flatten(1)
+      @flaggable_entities = Lightning.flaggable_entities
     end
 
     # GET /features/new

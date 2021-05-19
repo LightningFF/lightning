@@ -1,7 +1,7 @@
 module Lightning
   module Flaggable
-    def ff_display
-      "#{self.name} (#{self.class.to_s})"
+    def lightning_display
+      "#{self.id} - #{self.name} (#{self.class.to_s})"
     end
   end
 end

@@ -9,7 +9,7 @@ module Lightning
 
     private
     def set_entity
-      self.entity = self.entity_type.constantize.find(self.entity_id)
+      self.entity = self.entity_type.constantize.find_by_id(self.entity_id)
     end
 
   end
