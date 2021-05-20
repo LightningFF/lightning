@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Lightning::Feature, type: :model do
-  it "can be successfully created" do
-    feature = Lightning::Feature.create("Don", "Feature description",:enabled_globally)
+RSpec.describe Lightning::Api, type: :model do
+  it "feature can be successfully created" do
+    feature = Lightning::Api.create("Don", "Feature description",:enabled_globally)
     expect(feature).to eq(true)
   end
 end
