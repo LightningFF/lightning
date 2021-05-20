@@ -52,11 +52,13 @@ To run the test suite, pull the repo locally and run `rspec spec/`. All tests li
 
 ## Contributing
 
+You need to have ruby version 2.7.3 installed locally and rails version 6.1.3. 
+
 ```ruby
 cd test/dummy
 bundle install
-rails db:migrate
-rails server
+bin/rails db:migrate
+bin/rails server
 ```
 
 ## License
