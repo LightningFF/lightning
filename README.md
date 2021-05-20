@@ -2,9 +2,11 @@
 Set up an end-to-end feature flagging system in <1 minute.
 
 ## Getting Started
-How to use my plugin.
 
-* Add gem to your application's Gemfile: `gem 'lightning'`
+* Add gem to your application's Gemfile
+```ruby
+gem 'lightning', :git => 'https://github.com/LightningFF/lightning', :branch => 'main'
+```
 * `bundle install`
 * `bin/rails lightning:install:migrations`
 * `bin/rails db:migrate SCOPE=lightning`
