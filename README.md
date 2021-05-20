@@ -45,6 +45,11 @@ end
 
 Lightning makes is super easy to configure how data is represented through the UI. 
 
+## Running Tests
+
+To run the test suite, pull the repo locally and run `rspec spec/`. All tests live in the **spec/** folder.
+
+
 ## Contributing
 
 ```ruby
