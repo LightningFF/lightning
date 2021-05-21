@@ -8,11 +8,15 @@ module Lightning
       feature.key = key
       feature.description = description
       feature.state = state
-      feature.save || raise(FeatureError.new("Failed to create new feature"))
+      feature.save!
+    rescue
+      raise FeatureError.new("Failed to create new feature")
     end
 
     def self.get(key)
-      Feature.find_by_key(key) || raise(FeatureError.new("Feature not found"))
+      Feature.find_by_key!(key)
+    rescue
+      raise ::Lightning::Errors::FeatureNotFound.new("Feature with key: #{key} not found")
     end
 
     def self.list
