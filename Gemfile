@@ -9,5 +9,4 @@ group :development do
   gem 'puma', '~> 5.0'
   gem "rspec-rails", '~> 5.0.1'
   gem 'pry', '~> 0.14.1'
-  gem 'factory_bot', '~> 6.2.0'
 end

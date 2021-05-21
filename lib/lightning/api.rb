@@ -3,20 +3,16 @@ module Lightning
     class FeatureError < StandardError
     end
 
-    def self.create(key, description, state)
-      feature = Feature.new
-      feature.key = key
-      feature.description = description
-      feature.state = state
-      feature.save!
-    rescue
-      raise FeatureError.new("Failed to create new feature")
+    def self.create!(key, description = "")
+      Feature.create!(key: key, description: description)
+    rescue StandardError
+      raise FeatureError, 'Failed to create new feature'
     end
 
     def self.get(key)
       Feature.find_by_key!(key)
-    rescue
-      raise ::Lightning::Errors::FeatureNotFound.new("Feature with key: #{key} not found")
+    rescue StandardError
+      raise ::Lightning::Errors::FeatureNotFound, "Feature with key: #{key} not found"
     end
 
     def self.list
@@ -32,7 +28,7 @@ module Lightning
     end
 
     def self.entities(key)
-      get(key).feature_opt_ins.all.map{|f| f.entity}
+      get(key).feature_opt_ins.all.map(&:entity)
     end
 
     def self.enable_entity(key, entity)
@@ -48,8 +44,9 @@ module Lightning
 
     def self.enabled?(entity, feature_key)
       joined_table = Feature.left_outer_joins(:feature_opt_ins)
-      joined_table.where(key: feature_key, state: :enabled_per_entity, feature_opt_ins: { entity_id: entity.id, entity_type: entity.class.to_s }).or(joined_table.where(key: feature_key, state: :enabled_globally)).exists?
+      joined_table.where(key: feature_key, state: :enabled_per_entity,
+                         feature_opt_ins: { entity_id: entity.id, entity_type: entity.class.to_s }).or(joined_table.where(key: feature_key,
+                                                                                                                          state: :enabled_globally)).exists?
     end
-
   end
 end
