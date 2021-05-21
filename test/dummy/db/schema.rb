@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_002902) do
+ActiveRecord::Schema.define(version: 2021_05_13_140212) do
 
   create_table "lightning_feature_opt_ins", force: :cascade do |t|
     t.integer "feature_id", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_002902) do
   create_table "lightning_features", force: :cascade do |t|
     t.string "key", null: false
     t.text "description"
-    t.integer "state", null: false
+    t.integer "state", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["key"], name: "index_lightning_features_on_key", unique: true
