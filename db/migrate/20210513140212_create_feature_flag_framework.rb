@@ -3,7 +3,7 @@ class CreateFeatureFlagFramework < ActiveRecord::Migration[6.1]
     create_table :lightning_features do |t|
       t.string :key, index: { unique: true }, null: false
       t.text :description
-      t.integer :state, null: false
+      t.integer :state, default: 0, null: false
 
       t.timestamps
     end
