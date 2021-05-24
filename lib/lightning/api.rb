@@ -21,6 +21,8 @@ module Lightning
 
     def self.update(key, attributes)
       get(key).update(attributes)
+    rescue ArgumentError
+      raise ::Lightning::Errors::InvalidFeatureState, "Failed to update state. State must be one of the following: #{Feature.states.keys} "
     end
 
     def self.delete(key)
@@ -39,7 +41,9 @@ module Lightning
     end
 
     def self.remove_entity(key, entity)
-      get(key).feature_opt_ins.find(entity_id: entity.id, entity_type: entity.class.to_s)&.destroy
+      get(key).feature_opt_ins.find_by(entity_id: entity.id, entity_type: entity.class.to_s)&.destroy
+    rescue ActiveRecord::RecordNotFound
+      raise ::Lightning::Errors::EntityNotFound, "Could not find entity with id #{entity.id} and type #{entity.class.to_s}"
     end
 
     def self.enabled?(entity, feature_key)
