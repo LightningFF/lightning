@@ -4,6 +4,7 @@ describe Lightning::Api do
   context '.create' do
     it 'creates the feature' do
       Lightning::Api.create!('create_feature', 'New feature for testing')
+      expect(Lightning::Api.get('create_feature')).to be_an_instance_of Lightning::Feature
     end
 
     it 'fails to create features with duplicate keys' do

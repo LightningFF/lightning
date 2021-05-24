@@ -1,6 +1,7 @@
 require 'lightning/version'
 require 'lightning/engine'
 require 'lightning/api'
+require 'lightning/errors'
 
 module Lightning
   # Your code goes here...

@@ -1,5 +1,3 @@
-require 'lightning/errors'
-
 module Lightning
   class Api
     class FeatureError < StandardError
