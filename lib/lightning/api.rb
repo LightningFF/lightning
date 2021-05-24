@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 module Lightning
   class Api
-    class FeatureError < StandardError
-    end
 
     def self.create!(key, description = '')
       Feature.create!(key: key, description: description)
     rescue StandardError
-      raise FeatureError, 'Failed to create new feature'
+      raise ::Lightning::Errors::FailedToCreate, 'Failed to create new feature'
     end
 
     def self.get(key)
-      Feature.find_by_key!(key)
+      Feature.find_by!(key: key)
     rescue StandardError
       raise ::Lightning::Errors::FeatureNotFound, "Feature with key: #{key} not found"
     end
@@ -48,9 +48,10 @@ module Lightning
 
     def self.enabled?(entity, feature_key)
       joined_table = Feature.left_outer_joins(:feature_opt_ins)
-      joined_table.where(key: feature_key, state: :enabled_per_entity,
-                         feature_opt_ins: { entity_id: entity.id, entity_type: entity.class.to_s }).or(joined_table.where(key: feature_key,
-                                                                                                                          state: :enabled_globally)).exists?
+      joined_table
+        .where(key: feature_key, state: :enabled_per_entity, feature_opt_ins: { entity_id: entity.id, entity_type: entity.class.to_s })
+        .or(joined_table.where(key: feature_key, state: :enabled_globally))
+        .exists?
     end
   end
 end

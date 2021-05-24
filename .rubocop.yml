@@ -2,7 +2,6 @@ require:
   - rubocop-rails
   - rubocop-rspec
 
-
 AllCops:
   Exclude:
     - 'db/**/*'
@@ -13,6 +12,9 @@ AllCops:
 
 Metrics/LineLength:
   Max: 100
+
+Layout/LineLength:
+  Max: 150
 
 Metrics/BlockLength:
   Exclude:
@@ -27,4 +29,10 @@ Lint/AmbiguousBlockAssociation:
     - test/dummy/spec/**/*
 
 Style/Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false
