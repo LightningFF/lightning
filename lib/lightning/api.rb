@@ -1,9 +1,11 @@
+require 'lightning/errors'
+
 module Lightning
   class Api
     class FeatureError < StandardError
     end
 
-    def self.create!(key, description = "")
+    def self.create!(key, description = '')
       Feature.create!(key: key, description: description)
     rescue StandardError
       raise FeatureError, 'Failed to create new feature'

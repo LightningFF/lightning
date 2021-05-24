@@ -1,0 +1,30 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'test/dummy/db/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'test/dummy/bin/**/*'
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - test/dummy/config/**/*
+    - spec/**/*
+    - test/dummy/spec/**/*
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+    - test/dummy/spec/**/*
+
+Style/Documentation:
+  Enabled: false

@@ -1,6 +1,6 @@
-require "lightning/version"
-require "lightning/engine"
-require "lightning/api"
+require 'lightning/version'
+require 'lightning/engine'
+require 'lightning/api'
 
 module Lightning
   # Your code goes here...
