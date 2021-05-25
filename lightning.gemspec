@@ -1,7 +1,7 @@
 require_relative 'lib/lightning/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'lightning'
+  spec.name        = 'lightningff'
   spec.version     = Lightning::VERSION
   spec.authors     = ['Ruthwick Pathireddy', 'Pranav Singh']
   spec.email       = ['ruthwickp@gmail.com', 'pranav@getcadet.com']
