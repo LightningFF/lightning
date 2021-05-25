@@ -1,4 +1,4 @@
-# ⚡️ Lightning ![Tests](https://github.com/LightningFF/lightning/actions/workflows/run_test.yml/badge.svg)
+# ⚡️ Lightning ![Tests](https://github.com/LightningFF/lightning/actions/workflows/run_test.yml/badge.svg) [![Gem Version](https://badge.fury.io/rb/lightningff.svg)](https://badge.fury.io/rb/lightningff)
 An end-to-end feature flagging system that can be setup in <1 minute.
 
 Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. 
