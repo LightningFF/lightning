@@ -1,5 +1,9 @@
 name: Ruby Gem
 
+on:
+  workflow_dispatch:
+    branches: [ main ]
+
 jobs:
   build:
     name: Build + Publish
