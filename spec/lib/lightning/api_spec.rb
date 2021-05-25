@@ -34,7 +34,7 @@ RSpec.describe Lightning::Api do
   end
 
   describe '.list' do
-    it 'retursn empty list when no features exists' do
+    it 'returns an empty list when no features exist' do
       expect(described_class.list).to be_empty
     end
 
