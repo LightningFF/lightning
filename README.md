@@ -1,4 +1,4 @@
-# ⚡️ Lightning
+# ⚡️ Lightning ![Tests](https://github.com/LightningFF/lightning/actions/workflows/run_test.yml/badge.svg)
 Set up an end-to-end feature flagging system in <1 minute.
 
 ## Getting Started
@@ -59,6 +59,7 @@ You need to have ruby version 2.7.3 installed locally and rails version 6.1.3.
 ```ruby
 cd test/dummy
 bundle install
+bin/rails db:create
 bin/rails db:migrate
 bin/rails server
 ```
