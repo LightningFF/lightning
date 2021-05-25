@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lightning (0.0.1)
+    lightningff (0.0.1)
       rails (~> 6.1.3, >= 6.1.3.2)
 
 GEM
@@ -183,7 +183,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
-    websocket-driver (0.7.3)
+    websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.4.2)
@@ -193,7 +193,7 @@ PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
-  lightning!
+  lightningff!
   pry (~> 0.14.1)
   puma (~> 5.0)
   rspec-rails (~> 5.0.1)
