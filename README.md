@@ -1,5 +1,7 @@
 # ⚡️ Lightning ![Tests](https://github.com/LightningFF/lightning/actions/workflows/run_test.yml/badge.svg)
-Set up an end-to-end feature flagging system in <1 minute.
+An end-to-end feature flagging system that can be setup in <1 minute.
+
+Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. 
 
 ## Getting Started
 
