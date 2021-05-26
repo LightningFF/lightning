@@ -39,28 +39,32 @@ Rails.application.routes.draw do
 end
 ```
 
-## Functionality
-* Easy-to-use UI that allows creating, modifying, and deleting features and permissioning entities to those features
-* Highly configurable options to display data on the UI
-* Console API to manage features and permissions without any UI
+## Rails Console API Usage
 
-
-## Rails Console API
+```ruby
 ### Feature Management
-* Create Feature: `Lightning::Feature.create(<key>, <description>, <state>)` where state is one of three options: `[:inactive, :enabled_globally, :enabled_per_entity]`
-* Find feature by key: `Lightning::Feature.find_by_key(<key>)`
-* Update feature description: `@feature.set_description(<description>)`
-* Update feature state
-    - Mark inactive: `@feature.inactive!`
-    - Enable globally: `@feature.enabled_globally!`
-    - Enable per entity: `@feature.enabled_per_entity!`
-* Delete feature: `Lightning::Feature.delete(<key>)`
-### Feature Permissions/Opt Ins Management
-* Add entity to feature: `@feature.add_entity(<entity>)`
-* List entities for feature: `@feature.entities`
-* Check if feature is enabled for entity at feature level: `@feature.enabled_for?(<entity>)`
-* Check if feature is enabled for entity at class level: `Lightning::Feature.enabled_for?(<entity>, <key>)`
-* Remove entity access to feature: `@feature.remove(<entity>)`
+# Create feature (state is disabled)
+Lightning.create!('homepage_v2', 'New homepage with better logo')
+# Get feature by key
+Lightning.get('homepage_v2')
+# List all features
+Lightning.list
+# Update feature state/description
+Lightning.update('homepage_v2', {state: 'enabled_per_entity', description: 'Homepage with new nav'})
+# Delete feature
+Lightning.delete('homepage_v2')
+
+### Feature Permissions Management
+u = User.create(name: 'Dummy user') 
+# Add entity to feature
+Lightning.enable_entity('homepage_v2', u)
+# List entities for feature
+Lightning.entities
+# Remove entity to feature
+Lightning.remove_entity('homepage_v2', u)
+# Check if feature is enabled for entity
+Lightning.enabled?(u, 'homepage_v2')
+```
 
 ## Advanced Configuration
 
