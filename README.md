@@ -39,10 +39,6 @@ Rails.application.routes.draw do
 end
 ```
 
-_Note: If you encounter an AssetNotPrecompiled error when accessing the UI, try one of the following_
-* Add `//= link lightning/application.css` to `app/assets/config/manifest.js`
-* Add `config.assets.check_precompiled_asset = false` to your `development.rb` (or other environment file) 
-
 ## Functionality
 * Easy-to-use UI that allows creating, modifying, and deleting features and permissioning entities to those features
 * Highly configurable options to display data on the UI
