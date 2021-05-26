@@ -3,24 +3,45 @@ An end-to-end feature flagging system that can be setup in <1 minute.
 
 Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. 
 
-## Getting Started
+## Install
 
-* Add gem to your application's Gemfile
+Add the following link to Gemfile
 ```ruby
-gem 'lightning', :git => 'https://github.com/LightningFF/lightning', :branch => 'main'
+gem 'lightningff', require: 'lightning'
 ```
-* `bundle install`
-* `bin/rails lightning:install:migrations`
-* `bin/rails db:migrate SCOPE=lightning`
-* Create the file `config/initializers/lightning.rb` and populate it with your flaggable entities (i.e. `Lightning.flaggable_entities = ["User", "Workspace"]`)
-* Include the following module for each flaggable model: `include Lightning::Flaggable`. Example below
+and run `bundle install`. _Note: You might need to run `bundle update` to resolve any incompatible issues with rails._
+
+Set up feature flag migrations by running the following lines
+```bash
+bin/rails lightning:install:migrations
+bin/rails db:migrate SCOPE=lightning
+```
+
+Create `config/initializers/lightning.rb` and set your flaggable entities
+```ruby
+Lightning.flaggable_entities = ["User", "Workspace"]
+```
+For each flaggable model, add `include Lightning::Flaggable`.
 ```ruby
 class User < ApplicationRecord
   include Lightning::Flaggable
 end
 ```
-* Check feature availability for entity: `Lightning::Feature.enabled_for?(user, 'homepage_v2')`
-* To manage feature flags through the UI, add the following to your applications routes.rb file where `"lightning"` can be any route you define:`mount Lightning::Engine => "/lightning"`
+
+To check feature availability for entity: `Lightning::Feature.enabled?(user, <feature_key>)`
+
+### UI setup
+
+Mount engine in `routes.rb` file
+```ruby
+Rails.application.routes.draw do
+  mount Lightning::Engine => "/lightning"
+end
+```
+
+_Note: If you encounter an AssetNotPrecompiled error when accessing the UI, try one of the following_
+* Add `//= link lightning/application.css` to `app/assets/config/manifest.js`
+* Add `config.assets.check_precompiled_asset = false` to your `development.rb` (or other environment file) 
 
 ## Functionality
 * Easy-to-use UI that allows creating, modifying, and deleting features and permissioning entities to those features
