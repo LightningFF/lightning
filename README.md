@@ -16,6 +16,10 @@ Run the following script to install the entire feature flag functionality withou
 ```ruby
 rake lightning:install User Workspace
 ```
+If you want more control over the setup, run the command below and check out [Manual Installation](#manual-installation) and skip the migrations part
+```ruby
+rake lightning:install
+```
 
 
 #### Manual Installation
