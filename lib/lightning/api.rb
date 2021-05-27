@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Lightning
-  class Api
-
+  module Api
     def self.create!(key, description = '')
       Feature.create!(key: key, description: description)
     rescue StandardError

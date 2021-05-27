@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Lightning::Api do
+RSpec.describe Lightning do
   let(:user) { User.create(name: 'Dummy User') }
 
   describe '.create' do

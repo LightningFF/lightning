@@ -10,4 +10,8 @@ module Lightning
   def self.flaggable_entities
     @@flaggable_entities.map { |f| f.constantize }
   end
+
+  class << self
+    delegate :create!, :get, :list, :update, :delete, :entities, :enable_entity, :remove_entity, :enabled?, to: Api
+  end
 end
