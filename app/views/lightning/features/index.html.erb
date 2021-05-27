@@ -1,31 +1,34 @@
+<%= render partial: "header", locals: { show_new_feature_button: true } %>
+
 <div class="container">
   <p id="notice"><%= notice %></p>
 
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="lightning-logo">⚡️ Lightning</div>
-    <%= link_to '+ New Feature', new_feature_path, class: "btn btn-primary" %>
-  </div>
-
-  <table class="table mt-5">
-    <tbody>
-      <% @features.each do |feature| %>
-        <tr>
-          <td>
-            <% if feature.enabled_per_entity? %>
-              <span class="badge bg-primary"><%= pluralize feature.feature_opt_ins.count, "opt in" %></span>
-            <% elsif feature.enabled_globally? %>
-              <span class="badge bg-success">On</span>
-            <% else %>
-              <span class="badge bg-secondary">Off</span>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to feature.key, feature, class: "fw-monospace fw-bold text-underline-on-hover text-reset" %>
-          </td>
-          <td><%= feature.description %></td>
-          <td><%= feature.created_at.to_formatted_s(:short) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%if @features.empty? %>
+    <p class="lead">
+      No features created yet.
+    </p>
+  <% else %>
+    <table class="table">
+      <tbody>
+        <% @features.each do |feature| %>
+          <tr>
+            <td>
+              <% if feature.enabled_per_entity? %>
+                <span class="badge bg-primary"><%= pluralize feature.feature_opt_ins.count, "opt in" %></span>
+              <% elsif feature.enabled_globally? %>
+                <span class="badge bg-success">On</span>
+              <% else %>
+                <span class="badge bg-secondary">Off</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to feature.key, feature, class: "fw-monospace fw-bold text-underline-on-hover text-reset" %>
+            </td>
+            <td><%= feature.description %></td>
+            <td><%= feature.created_at.to_formatted_s(:short) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>

@@ -3,7 +3,7 @@ module Lightning
     isolate_namespace Lightning
 
     initializer "lightning.assets.precompile" do |app|
-      app.config.assets.precompile += %w( lightning/application.css )
+      app.config.assets.precompile += %w( lightning/application.css lightning/favicon )
     end
 
     config.generators do |g|

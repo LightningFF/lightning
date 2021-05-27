@@ -19,7 +19,7 @@ html {
 }
 
 .fw-monospace {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .text-underline-on-hover {
@@ -34,4 +34,5 @@ html {
   font-size: 18px;
   font-weight: bolder;
   letter-spacing: -0.5px;
+  text-decoration: none;
 }
