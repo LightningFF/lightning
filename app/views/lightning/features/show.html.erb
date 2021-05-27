@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<td><%= link_to 'Edit', edit_feature_path(@feature) %></td>
+<td><%= button_to 'Destroy', feature_path(@feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
 <p>
   <strong>Key:</strong>
   <%= @feature.key %>

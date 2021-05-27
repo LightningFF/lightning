@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+html {
+  font-size: 14px;
+}
+
+.fw-monospace {
+  font-family: monospace;
+}
+
+.text-underline-on-hover {
+  text-decoration: none;
+}
+
+.text-underline-on-hover:hover {
+  text-decoration: underline;
+}
+
+.lightning-logo {
+  font-size: 18px;
+  font-weight: bolder;
+  letter-spacing: -0.5px;
+}
