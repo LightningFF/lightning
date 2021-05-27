@@ -1,36 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Features</h1>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="lightning-logo">⚡️ Lightning</div>
+    <%= link_to '+ New Feature', new_feature_path, class: "btn btn-primary" %>
+  </div>
 
-<table>
-  <thead>
-  <tr>
-    <th>Key</th>
-    <th>Description</th>
-    <th>State</th>
-    <th>Created</th>
-    <th>Updated</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @features.each do |feature| %>
-    <tr>
-      <td><%= feature.key %></td>
-      <td><%= feature.description %></td>
-      <td><%= feature.state %></td>
-      <td><%= feature.created_at.to_formatted_s(:long) %></td>
-      <td><%= feature.updated_at.to_formatted_s(:long) %></td>
-      <td><%= link_to 'Show', feature %></td>
-      <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-      <td><%= button_to 'Destroy', feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-
-<br>
-
-<%= link_to 'New Feature', new_feature_path %>
+  <table class="table mt-5">
+    <tbody>
+      <% @features.each do |feature| %>
+        <tr>
+          <td>
+            <% if feature.enabled_per_entity? %>
+              <span class="badge bg-primary"><%= pluralize feature.feature_opt_ins.count, "opt in" %></span>
+            <% elsif feature.enabled_globally? %>
+              <span class="badge bg-success">On</span>
+            <% else %>
+              <span class="badge bg-secondary">Off</span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to feature.key, feature, class: "fw-monospace fw-bold text-underline-on-hover text-reset" %>
+          </td>
+          <td><%= feature.description %></td>
+          <td><%= feature.created_at.to_formatted_s(:short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
