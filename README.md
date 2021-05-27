@@ -11,6 +11,14 @@ gem 'lightningff', require: 'lightning'
 ```
 and run `bundle install`. _Note: You might need to run `bundle update` to resolve any incompatible issues with rails._
 
+#### Script Installation
+Run the following script to install the entire feature flag functionality without manual setup for your models (i.e. User, Workspace)
+```ruby
+rake lightning:install User Workspace
+```
+
+
+#### Manual Installation
 Set up feature flag migrations by running the following lines
 ```bash
 bin/rails lightning:install:migrations
@@ -27,8 +35,6 @@ class User < ApplicationRecord
   include Lightning::Flaggable
 end
 ```
-
-To check feature availability for entity: `Lightning::Feature.enabled?(user, <feature_key>)`
 
 ### UI setup
 
@@ -55,15 +61,15 @@ Lightning.update('homepage_v2', {state: 'enabled_per_entity', description: 'Home
 Lightning.delete('homepage_v2')
 
 ### Feature Permissions Management
-u = User.create(name: 'Dummy user') 
+u = User.create(name: 'Dummy user')
+# Check if feature is enabled for entity
+Lightning.enabled?(u, 'homepage_v2')
 # Add entity to feature
 Lightning.enable_entity('homepage_v2', u)
 # List entities for feature
 Lightning.entities
 # Remove entity to feature
 Lightning.remove_entity('homepage_v2', u)
-# Check if feature is enabled for entity
-Lightning.enabled?(u, 'homepage_v2')
 ```
 
 ## Advanced Configuration
