@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Lightning do
   let(:user) { User.create(name: 'Dummy User') }
+  let(:user2) { User.create(name: 'Dummy User') }
+  let(:workspace) { Workspace.create(name: 'Dummy workspace') }
 
   describe '.create' do
     it 'creates the feature' do
@@ -116,11 +118,27 @@ RSpec.describe Lightning do
       expect(described_class.opt_ins(key).count).to eq(1)
     end
 
-    it 'feature adds an existing entity shows duplicate' do
+    it 'feature adds an existing entity is noop' do
       key = 'feature_key'
       described_class.create!(key)
       described_class.opt_in(key, user)
       described_class.opt_in(key, user)
+      expect(described_class.opt_ins(key).count).to eq(1)
+    end
+
+    it 'feature adds two entities with same entity type different entity id' do
+      key = 'feature_key'
+      described_class.create!(key)
+      described_class.opt_in(key, user)
+      described_class.opt_in(key, user2)
+      expect(described_class.opt_ins(key).count).to eq(2)
+    end
+
+    it 'feature adds two entities with same id different entity type' do
+      key = 'feature_key'
+      described_class.create!(key)
+      described_class.opt_in(key, user)
+      described_class.opt_in(key, workspace)
       expect(described_class.opt_ins(key).count).to eq(2)
     end
 

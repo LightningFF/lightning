@@ -33,10 +33,7 @@ module Lightning
     end
 
     def self.opt_in(key, entity)
-      permissioned_entity = get(key).feature_opt_ins.new
-      permissioned_entity.entity_id = entity.id
-      permissioned_entity.entity_type = entity.class.to_s
-      permissioned_entity.save!
+      get(key).feature_opt_ins.create_or_find_by!(entity_id: entity.id, entity_type: entity.class.to_s)
     end
 
     def self.opt_out(key, entity)

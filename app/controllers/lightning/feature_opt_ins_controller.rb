@@ -10,10 +10,7 @@ module Lightning
 
       entity_ids.each do |entity_id|
         entity = entity_class.find(entity_id)
-        feature_opt_in = @feature.feature_opt_ins.new
-        feature_opt_in.entity_id = entity.id
-        feature_opt_in.entity_type = entity_class.to_s
-        feature_opt_in.save!
+        @feature.feature_opt_ins.create_or_find_by!(entity_id: entity.id, entity_type: entity_class.to_s)
       end
 
       flash[:notice] = "Permissions has been created!"
