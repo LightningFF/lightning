@@ -12,6 +12,6 @@ module Lightning
   end
 
   class << self
-    delegate :create!, :get, :list, :update, :delete, :entities, :enable_entity, :remove_entity, :enabled?, to: Api
+    delegate :create!, :get, :list, :update, :delete, :opt_ins, :opt_in, :opt_out, :enabled?, to: Api
   end
 end
