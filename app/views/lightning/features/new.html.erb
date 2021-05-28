@@ -1,6 +1,15 @@
-<h1>New Feature</h1>
+<%= render partial: "lightning/header", locals: { show_new_feature_button: false } %>
 
-<%= render 'form', feature: @feature %>
-<br/>
+<div class="container">
+  <div class="d-grid align-items-center gap-1 d-md-block border-bottom pb-2 mb-4">
+    <%= link_to features_path, class: 'btn btn-light btn-sm' do %>
+      <i class="bi-arrow-left-short"></i> All features
+    <% end %>
+  </div>
 
-<%= link_to 'Back', features_path %>
+  <h3 class="fw-bold">
+    New Feature
+  </h3>
+
+  <%= render 'form', feature: @feature %>
+</div>

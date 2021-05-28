@@ -1,0 +1,45 @@
+<%= form_with(model: feature, class: "d-grid") do |form| %>
+  <div class="col-4">
+    <% if feature.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+        <ul>
+          <% feature.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @feature.new_record? %>
+      <div class="mb-2">
+        <%= form.label :key, "Name", class: "form-label" %>
+        <%= form.text_field :key, class: "form-control" %>
+      </div>
+    <% end %>
+
+    <div class="mb-2">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :state, class: "form-label" %>
+      <%= form.select :state, [
+        ["Globally disabled", "disabled"],
+        ["Globally enabled (regardless of opt-ins)", "enabled_globally"],
+        ["Enabled only for opt-ins", "enabled_per_entity"],
+      ], {}, { class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= form.submit 'Save', class: "btn btn-primary" %>
+      <% if @feature.new_record? %>
+        <%= link_to 'Cancel', features_path, class: "btn btn-light" %>
+      <% else %>
+        <%= link_to 'Cancel', feature_path(feature), class: "btn btn-light" %>
+      <% end%>
+    </div>
+  </div>
+<% end %>
