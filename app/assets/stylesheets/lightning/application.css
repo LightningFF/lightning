@@ -22,12 +22,20 @@ html {
   font-family: "Courier New", Courier, monospace;
 }
 
-.text-underline-on-hover {
+.text-decoration-underline-on-hover {
   text-decoration: none;
 }
 
-.text-underline-on-hover:hover {
+.text-decoration-underline-on-hover:hover {
   text-decoration: underline;
+}
+
+.fs-7 {
+  font-size: 14px;
+}
+
+.fs-8 {
+  font-size: 12px;
 }
 
 .lightning-logo {
