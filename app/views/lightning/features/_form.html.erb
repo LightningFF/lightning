@@ -25,12 +25,16 @@
     </div>
 
     <div class="mb-2">
-      <%= form.label :state, class: "form-label" %>
-      <%= form.select :state, [
-        ["Globally disabled", "disabled"],
-        ["Globally enabled (regardless of opt-ins)", "enabled_globally"],
-        ["Enabled only for opt-ins", "enabled_per_entity"],
-      ], {}, { class: "form-select" } %>
+      <% if @feature.new_record? %>
+        <span class="text-muted">After saving your feature flag, you can enable it.</span>
+      <% else %>
+          <%= form.label :state, class: "form-label" %>
+          <%= form.select :state, [
+            ["Globally disabled", "disabled"],
+            ["Globally enabled (regardless of opt-ins)", "enabled_globally"],
+            ["Enabled only for opt-ins", "enabled_per_entity"],
+          ], {}, { class: "form-select" } %>
+      <% end %>
     </div>
 
     <div>
