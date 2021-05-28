@@ -56,7 +56,7 @@ Lightning.opt_in('homepage_v2', user)
 # Opt out an entity
 Lightning.opt_out('homepage_v2', user)
 
-# List entities for feature
+# List entities opted in to a feature
 Lightning.opt_ins('hompage_v2')
 ```
 
