@@ -1,3 +1,4 @@
+# This migration comes from lightning (originally 20210513140212)
 class CreateFeatureFlagFramework < ActiveRecord::Migration[6.1]
   def change
     create_table :lightning_features do |t|
