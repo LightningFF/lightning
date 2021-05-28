@@ -1,39 +1,93 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "header", locals: { show_new_feature_button: false } %>
 
-<td><%= link_to 'Edit', edit_feature_path(@feature) %></td>
-<td><%= button_to 'Destroy', feature_path(@feature), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Key:</strong>
-  <%= @feature.key %>
-</p>
+  <div class="d-grid align-items-center gap-1 d-md-block border-bottom pb-2 mb-4">
+    <%= link_to 'Back', features_path, class: 'btn btn-light btn-sm' %>
+    <span class="text-light px-2">|</span>
+    <%= link_to 'Edit', edit_feature_path(@feature), class: "btn btn-light btn-sm" %>
+    <div class="btn-group">
+      <button type="button" class="btn btn-light btn-sm dropdown-toggle ms-2" data-bs-toggle="dropdown" aria-expanded="false">
+        More
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= button_to 'Destroy', feature_path(@feature), class: "dropdown-item", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @feature.description %>
-</p>
+  <h1 class="fw-monospace fw-bold">
+    <%= @feature.key %>
+  </h1>
+  <div class="d-flex align-items-center">
+    <div class="fs-5">
+      <% if @feature.enabled_per_entity? %>
+        <span class="badge bg-primary">Enabled per entity</span>
+      <% elsif @feature.enabled_globally? %>
+        <span class="badge bg-success">Enabled globally</span>
+      <% else %>
+        <span class="badge bg-secondary">Off</span>
+      <% end %>
+    </div>
+    <div class="text-muted ms-2">
+      <%= @feature.description %>
+    </div>
+    <% if @feature.description.present? %>
+      <div class="text-muted ms-2">—</div>
+    <% end %>
+    <div class="text-muted ms-2">
+      <%= @feature.created_at.to_formatted_s(:short) %>
+    </div>
+  </div>
 
-<p>
-  <strong>State:</strong>
-  <%= @feature.state %>
-</p>
+  <div class="mt-5">
+    <%= form_with model: [@feature, @feature.feature_opt_ins.build] do |form| %>
+      <div>
+        <label class="form-label">Enable feature for entities</label>
+      </div>
+      <div class="row g-3">
+        <div class="col-auto">
+          <%=
+            form.select :entity_type,
+            options_for_select(@flaggable_entities.map { |entity| [ entity.to_s, entity.to_s] }),
+            {},
+            { class: "form-select" }
+          %>
+        </div>
+        <div class="col-4">
+          <%= form.text_field :entity_id, placeholder: 'comma separated entity ids', class: 'form-control' %>
+        </div>
+        <div class="col-auto">
+          <%= form.submit 'Save', class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
+  <div class="mt-5">
+    <h3>
+      Opt Ins
+      <small class="text-muted">(<%= @feature.feature_opt_ins.count %>)</small>
+    </h3>
 
-<p>
-  <strong>Created:</strong>
-  <%= @feature.created_at.to_formatted_s(:long) %>
-</p>
-
-<p>
-  <strong>Updated:</strong>
-  <%= @feature.updated_at.to_formatted_s(:long) %>
-</p>
-
-
-<h3>Opt In Entities</h3>
-<%= render @feature.feature_opt_ins %>
-<%= render "lightning/feature_opt_ins/form" %>
-<br/>
-
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+    <% if @feature.feature_opt_ins.reject(&:new_record?).empty? %>
+      <p class="lead text-muted">👌 No entities opted in yet.</p>
+    <% else %>
+      <table class="table table-sm">
+        <% @feature.feature_opt_ins.each do |feature_opt_in| %>
+          <% next if feature_opt_in.new_record? %>
+          <tbody>
+            <tr>
+              <td><code><%= feature_opt_in.entity.class %></code><td>
+              <td><%= feature_opt_in.entity.lightning_display %></td>
+              <td><%= button_to 'Opt out', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
