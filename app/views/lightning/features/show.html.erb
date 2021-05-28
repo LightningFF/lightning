@@ -1,10 +1,12 @@
-<%= render partial: "header", locals: { show_new_feature_button: false } %>
+<%= render partial: "lightning/header", locals: { show_new_feature_button: false } %>
 
 <div class="container">
   <p id="notice"><%= notice %></p>
 
   <div class="d-grid align-items-center gap-1 d-md-block border-bottom pb-2 mb-4">
-    <%= link_to 'Back', features_path, class: 'btn btn-light btn-sm' %>
+    <%= link_to features_path, class: 'btn btn-light btn-sm' do %>
+      <i class="bi-arrow-left-short"></i> All features
+    <% end %>
     <span class="text-light px-2">|</span>
     <%= link_to 'Edit', edit_feature_path(@feature), class: "btn btn-light btn-sm" %>
     <div class="btn-group">
@@ -13,33 +15,37 @@
       </button>
       <ul class="dropdown-menu">
         <li>
-          <%= button_to 'Destroy', feature_path(@feature), class: "dropdown-item", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= button_to 'Delete', feature_path(@feature), class: "dropdown-item", method: :delete, data: { confirm: 'Are you sure?' } %>
         </li>
       </ul>
     </div>
   </div>
 
-  <h1 class="fw-monospace fw-bold">
+  <h1 class="fw-monospace fw-bold mb-1">
     <%= @feature.key %>
   </h1>
-  <div class="d-flex align-items-center">
+  <div class="fs-6 mb-2">
+    <%= @feature.description %>
+  </div>
+  <div class="d-flex align-items-baseline gap-2">
     <div class="fs-5">
       <% if @feature.enabled_per_entity? %>
-        <span class="badge bg-primary">Enabled per entity</span>
+        <span class="badge bg-primary">
+          <%= pluralize @feature.feature_opt_ins.count, "opt in" %>
+        </span>
       <% elsif @feature.enabled_globally? %>
-        <span class="badge bg-success">Enabled globally</span>
+        <span class="badge bg-success">Globally enabled</span>
       <% else %>
         <span class="badge bg-secondary">Off</span>
       <% end %>
     </div>
-    <div class="text-muted ms-2">
-      <%= @feature.description %>
+    <div class="text-muted">•</div>
+    <div class="text-muted fs-8">
+      Created <%= @feature.created_at.to_formatted_s(:short) %>
     </div>
-    <% if @feature.description.present? %>
-      <div class="text-muted ms-2">—</div>
-    <% end %>
-    <div class="text-muted ms-2">
-      <%= @feature.created_at.to_formatted_s(:short) %>
+    <div class="text-muted">•</div>
+    <div class="text-muted fs-8">
+      Last updated <%= @feature.updated_at.to_formatted_s(:short) %>
     </div>
   </div>
 

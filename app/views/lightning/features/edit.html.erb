@@ -1,7 +1,49 @@
-<h1>Editing Feature</h1>
+<%= render partial: "lightning/header", locals: { show_new_feature_button: false } %>
 
-<%= render 'form', feature: @feature %>
-<br/>
+<div class="container">
+  <div class="d-grid align-items-center gap-1 d-md-block border-bottom pb-2 mb-4">
+    <%= link_to feature_path(@feature), class: 'btn btn-light btn-sm' do %>
+      <i class="bi-arrow-left-short"></i> <%= @feature.key %>
+    <% end %>
+  </div>
 
-<%= link_to 'Show', @feature %> |
-<%= link_to 'Back', features_path %>
+  <h1 class="fw-monospace fw-bold">
+    <%= @feature.key %>
+  </h1>
+
+  <%= form_with(model: @feature, class: "d-grid") do |form| %>
+    <div class="col-4">
+      <% if @feature.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+          <ul>
+            <% @feature.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-2">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="mb-2">
+        <%= form.label :state, class: "form-label" %>
+
+        <%= form.select :state, [
+          ["Globally disabled", "disabled"],
+          ["Globally enabled (regardless of opt-ins)", "enabled_globally"],
+          ["Enabled only for opt-ins", "enabled_per_entity"],
+        ], {}, { class: "form-select" } %>
+      </div>
+
+      <div>
+        <%= form.submit 'Save', class: "btn btn-primary" %>
+        <%= link_to 'Cancel', feature_path(@feature), class: "btn btn-light" %>
+      </div>
+    </div>
+  <% end %>
+</div>
