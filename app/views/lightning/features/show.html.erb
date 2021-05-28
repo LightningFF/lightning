@@ -44,32 +44,50 @@
   </div>
 
   <div class="mt-5">
-    <h3>Opt Ins</h3>
-    <table class="table table-sm">
-      <% @feature.feature_opt_ins.each do |feature_opt_in| %>
-        <tbody>
-          <tr>
-            <td><code><%= feature_opt_in.entity.class %></code><td>
-            <td><%= feature_opt_in.entity.lightning_display %></td>
-            <td><%= button_to 'Remove', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        </tbody>
-      <% end %>
-    </table>
-
     <%= form_with model: [@feature, @feature.feature_opt_ins.build] do |form| %>
-      <div class="d-flex align-items-start gap-1">
-        <div>
-          <%= form.label :entity_type, 'Select Entity Type' %><br>
-          <%= form.select :entity_type, options_for_select(@flaggable_entities.map { |u| [ u.to_s, u.to_s] }) %>
+      <div>
+        <label class="form-label">Enable feature for entities</label>
+      </div>
+      <div class="row g-3">
+        <div class="col-auto">
+          <%=
+            form.select :entity_type,
+            options_for_select(@flaggable_entities.map { |entity| [ entity.to_s, entity.to_s] }),
+            {},
+            { class: "form-select" }
+          %>
         </div>
-        <div>
-          <%= form.label :entity_id, 'Entity Id' %><br>
-          <%= form.text_field :entity_id %>
+        <div class="col-4">
+          <%= form.text_field :entity_id, placeholder: 'comma separated entity ids', class: 'form-control' %>
         </div>
-        <%= form.submit 'Add entity to feature' %>
+        <div class="col-auto">
+          <%= form.submit 'Save', class: "btn btn-primary" %>
+        </div>
       </div>
     <% end %>
+  </div>
 
+  <div class="mt-5">
+    <h3>
+      Opt Ins
+      <small class="text-muted">(<%= @feature.feature_opt_ins.count %>)</small>
+    </h3>
+
+    <% if @feature.feature_opt_ins.reject(&:new_record?).empty? %>
+      <p class="lead text-muted">👌 No entities opted in yet.</p>
+    <% else %>
+      <table class="table table-sm">
+        <% @feature.feature_opt_ins.each do |feature_opt_in| %>
+          <% next if feature_opt_in.new_record? %>
+          <tbody>
+            <tr>
+              <td><code><%= feature_opt_in.entity.class %></code><td>
+              <td><%= feature_opt_in.entity.lightning_display %></td>
+              <td><%= button_to 'Opt out', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>
