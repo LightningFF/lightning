@@ -40,7 +40,11 @@ RSpec.describe Lightning do
 
     it 'list all features with some results' do
       [1, 2, 3].each { |k| described_class.create!(k, "Feature #{k}") }
+
       expect(described_class.list.count).to eq(3)
+      expect(described_class.opt_ins.includes?(1)).to eq(true)
+      expect(described_class.opt_ins.includes?(2)).to eq(true)
+      expect(described_class.opt_ins.includes?(3)).to eq(true)
     end
   end
 
@@ -95,57 +99,57 @@ RSpec.describe Lightning do
     end
   end
 
-  describe '.entities' do
+  describe '.opt_ins' do
     it 'feature with no entities' do
       key = 'no_entities_key'
       described_class.create!(key, 'Feature with no entities')
-      expect(described_class.entities(key)).to be_empty
+      expect(described_class.opt_ins(key)).to be_empty
     end
 
     it 'feature that does not exist throws error' do
-      expect { described_class.entities('feature_does_not_exist') }.to raise_error(::Lightning::Errors::FeatureNotFound)
+      expect { described_class.opt_ins('feature_does_not_exist') }.to raise_error(::Lightning::Errors::FeatureNotFound)
     end
   end
 
-  describe '.enable_entity' do
+  describe '.opt_in' do
     it 'feature adds a new entity' do
-      key = 'enable_entity'
+      key = 'opt_in'
       described_class.create!(key)
-      described_class.enable_entity(key, user)
+      described_class.opt_in(key, user)
       expect(described_class.entities(key).count).to eq(1)
     end
 
     it 'feature adds an existing entity shows duplicate' do
-      key = 'enable_entity'
+      key = 'opt_in'
       described_class.create!(key)
-      described_class.enable_entity(key, user)
-      described_class.enable_entity(key, user)
+      described_class.opt_in(key, user)
+      described_class.opt_in(key, user)
       expect(described_class.entities(key).count).to eq(2)
     end
 
     it 'feature that does not exist throws error' do
-      expect { described_class.enable_entity('feature_does_not_exist', user) }.to raise_error(::Lightning::Errors::FeatureNotFound)
+      expect { described_class.opt_in('feature_does_not_exist', user) }.to raise_error(::Lightning::Errors::FeatureNotFound)
     end
   end
 
-  describe '.remove_entity' do
+  describe '.opt_out' do
     it 'feature removes already existing entity' do
       key = 'enable_entity'
       described_class.create!(key)
-      described_class.enable_entity(key, user)
-      described_class.remove_entity(key, user)
+      described_class.opt_in(key, user)
+      described_class.opt_out(key, user)
       expect(described_class.entities(key)).to be_empty
     end
 
     it 'feature remove non-existing entity noop' do
       key = 'enable_entity'
       described_class.create!(key)
-      described_class.remove_entity(key, user)
+      described_class.opt_out(key, user)
       expect(described_class.entities(key)).to be_empty
     end
 
     it 'feature that does not exist throws error' do
-      expect { described_class.remove_entity('feature_does_not_exist', user) }.to raise_error(::Lightning::Errors::FeatureNotFound)
+      expect { described_class.opt_out('feature_does_not_exist', user) }.to raise_error(::Lightning::Errors::FeatureNotFound)
     end
   end
 
@@ -158,7 +162,7 @@ RSpec.describe Lightning do
 
     it 'returns true when enabled for user entity' do
       described_class.update(key, { state: :enabled_per_entity })
-      described_class.enable_entity(key, user)
+      described_class.opt_in(key, user)
       expect(described_class.enabled?(user, key)).to eq(true)
     end
 

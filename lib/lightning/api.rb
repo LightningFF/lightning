@@ -28,18 +28,18 @@ module Lightning
       get(key).destroy
     end
 
-    def self.entities(key)
+    def self.opt_ins(key)
       get(key).feature_opt_ins.all.map(&:entity)
     end
 
-    def self.enable_entity(key, entity)
+    def self.opt_in(key, entity)
       permissioned_entity = get(key).feature_opt_ins.new
       permissioned_entity.entity_id = entity.id
       permissioned_entity.entity_type = entity.class.to_s
       permissioned_entity.save!
     end
 
-    def self.remove_entity(key, entity)
+    def self.opt_out(key, entity)
       get(key).feature_opt_ins.find_by(entity_id: entity.id, entity_type: entity.class.to_s)&.destroy
     rescue ActiveRecord::RecordNotFound
       raise ::Lightning::Errors::EntityNotFound, "Could not find entity with id #{entity.id} and type #{entity.class.to_s}"
