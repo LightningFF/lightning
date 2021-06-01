@@ -172,30 +172,30 @@ RSpec.describe Lightning do
     let(:feature_key) { 'feature-key' }
 
     before do
-      described_class.create!(key)
+      described_class.create!(feature_key)
     end
 
-    subject { described_class.enabled?(key, user) }
+    subject { described_class.enabled?(feature_key, user) }
 
     context "when key exists" do
       it 'returns true when enabled for user entity' do
-        described_class.update(key, { state: :enabled_per_entity })
-        described_class.opt_in(key, user)
+        described_class.update(feature_key, { state: :enabled_per_entity })
+        described_class.opt_in(feature_key, user)
         expect(subject).to eq(true)
       end
 
       it 'returns false when not enabled for user entity' do
-        described_class.update(key, { state: :enabled_per_entity })
+        described_class.update(feature_key, { state: :enabled_per_entity })
         expect(subject).to eq(false)
       end
 
       it 'returns true when enabled globally' do
-        described_class.update(key, { state: :enabled_globally })
+        described_class.update(feature_key, { state: :enabled_globally })
         expect(subject).to eq(true)
       end
 
       it 'returns false when disabled' do
-        described_class.update(key, { state: :disabled })
+        described_class.update(feature_key, { state: :disabled })
         expect(subject).to eq(false)
       end
     end
