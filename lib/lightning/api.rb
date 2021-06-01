@@ -42,7 +42,7 @@ module Lightning
       raise ::Lightning::Errors::EntityNotFound, "Could not find entity with id #{entity.id} and type #{entity.class.to_s}"
     end
 
-    def self.enabled?(entity, feature_key)
+    def self.enabled?(feature_key, entity)
       joined_table = Feature.left_outer_joins(:feature_opt_ins)
       joined_table
         .where(key: feature_key, state: :enabled_per_entity, feature_opt_ins: { entity_id: entity.id, entity_type: entity.class.to_s })
