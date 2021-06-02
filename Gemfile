@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Specify your gem's dependencies in lightning.gemspec.
 gemspec
+gem "rails", "~> 6.1.3.2"
 
 group :development do
   gem 'pry', '~> 0.14.1'
