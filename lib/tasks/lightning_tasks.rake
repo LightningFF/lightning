@@ -3,15 +3,13 @@ namespace :lightning do
   task :install do
     _, *args = ARGV
 
-
-    # Task goes here
-    puts 'Copying migrations from engines...'
+    puts '️⚡️ Copying migrations'
     `bin/rails lightning:install:migrations`
 
-    puts 'Running engine migrations...'
+    puts '⚡️ Running migrations'
     `bin/rails db:migrate SCOPE=lightning`
 
-    puts 'Creating initializers script'
+    puts '⚡️ Creating lightning initializer'
     `echo "Lightning.flaggable_entities = [#{args.map{ |a| '\"' + a + '\"'}.join(", ")}]" > config/initializers/lightning.rb`
 
     args.each do |model|
@@ -43,9 +41,7 @@ namespace :lightning do
     end
 
 
-    puts 'Successfully ran setup script'
-
-    # Don't run the tasks in the arguments
+    puts '⚡️ Lightning setup complete'
     exit
   end
 end

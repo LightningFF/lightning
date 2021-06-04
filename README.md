@@ -15,16 +15,18 @@ gem 'lightningff', require: 'lightning'
 and run `bundle install`. _Note: You might need to run `bundle update` to resolve any incompatible issues with rails._
 
 #### Script Installation
+
 Run the following script to install the entire feature flag functionality without manual setup for your models (i.e. User, Workspace)
 ```ruby
-rake lightning:install User Workspace
+rails lightning:install User Workspace
 ```
 If you want more control over the setup, run the command below and check out [Manual Installation](#manual-installation) and skip the migrations part
 ```ruby
-rake lightning:install
+rails lightning:install
 ```
 
 #### Manual Installation
+
 Set up feature flag migrations by running the following lines
 ```bash
 bin/rails lightning:install:migrations
