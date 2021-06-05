@@ -4,7 +4,7 @@ module Lightning
       if self.respond_to?(:name)
         "#{self.id} - #{self.name}"
       else
-        self.if
+        self.id
       end
     end
   end
