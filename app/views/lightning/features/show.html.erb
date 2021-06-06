@@ -88,7 +88,7 @@
           <tbody>
             <tr>
               <td><code><%= feature_opt_in.entity.class %></code><td>
-              <td><%= feature_opt_in.entity.lightning_display %></td>
+              <td><%= feature_opt_in.entity_name %></td>
               <td><%= button_to 'Opt out', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           </tbody>
