@@ -12,7 +12,7 @@ Add the following link to Gemfile
 ```ruby
 gem 'lightningff', require: 'lightning'
 ```
-and run `bundle install`. _Note: You might need to run `bundle update` to resolve any incompatible issues with rails._
+and run `bundle install`.
 
 #### Script Installation
 
