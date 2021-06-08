@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lightningff (0.0.2)
+    lightningff (0.0.4)
       rails (>= 5.0.0)
 
 GEM
