@@ -2,14 +2,16 @@
 
 ![Tests](https://github.com/LightningFF/lightning/actions/workflows/run_test.yml/badge.svg) [![Gem Version](https://badge.fury.io/rb/lightningff.svg)](https://badge.fury.io/rb/lightningff)
 
-An end-to-end feature flagging system that can be setup in <1 minute.
-
-Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. Here's the Web UI:
+Get started with feature flags in <1 minute. Works with Ruby on Rails. Control who can access features from a simple Web UI or the console. Here's the Web UI:
 
 ![2021-06-09 at 12 50 p m](https://user-images.githubusercontent.com/1835120/121349297-40036480-c921-11eb-8ccf-9bd454f54b1e.png)
 
 ![2021-06-09 at 12 49 p m](https://user-images.githubusercontent.com/1835120/121349208-25c98680-c921-11eb-9c31-53bf0a4aa5db.png)
 
+- Enable (or disable) a feature for everyone
+- Enable it for specific models in your database (you can configure which models can be feature flagged)
+- Easily hide certain features behind flags
+- Lightning stores data on your database so you don't have to worry about availablity (currently works only with `ActiveRecord`)
 
 ## Install
 
@@ -108,26 +110,7 @@ Lightning.update('homepage_v2', { state: 'enabled_per_entity', description: 'Hom
 Lightning.delete('homepage_v2')
 ```
 
-## Advanced Configuration
-
-Lightning makes is super easy to configure how data is represented through the UI. 
-
-## Running Tests
-
-To run the test suite, pull the repo locally and run `rspec spec/`. All tests live in the **spec/** folder.
-
-
-## Contributing
-
-You need to have ruby version 2.7.3 installed locally and rails version 6.1.3. 
-
-```ruby
-cd test/dummy
-bundle install
-bin/rails db:create
-bin/rails db:migrate
-bin/rails server
-```
+---
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
