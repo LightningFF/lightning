@@ -4,7 +4,12 @@
 
 An end-to-end feature flagging system that can be setup in <1 minute.
 
-Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. 
+Lightning is a rails gem you can install into your Rails application to get both console and UI access to manage feature flags. Lightning saves you time to avoid building an in-house solution. Here's the Web UI:
+
+![2021-06-09 at 12 50 p m](https://user-images.githubusercontent.com/1835120/121349297-40036480-c921-11eb-8ccf-9bd454f54b1e.png)
+
+![2021-06-09 at 12 49 p m](https://user-images.githubusercontent.com/1835120/121349208-25c98680-c921-11eb-9c31-53bf0a4aa5db.png)
+
 
 ## Install
 
@@ -62,7 +67,7 @@ Lightning.opt_out('homepage_v2', user)
 Lightning.opt_ins('hompage_v2')
 ```
 
-## UI setup
+## UI Setup
 
 Mount engine in `routes.rb` file
 ```ruby
