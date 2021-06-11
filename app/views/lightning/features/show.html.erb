@@ -74,6 +74,28 @@
   </div>
 
   <div class="mt-5">
+    <%= form_with model: [@feature, @feature.feature_opt_criterions.build] do |form| %>
+      <div>
+        <label class="form-label">Enable feature with criteria</label>
+      </div>
+      <div class="row g-3">
+        <div class="col-auto">
+          <%=
+            form.select :criterion_type,
+                        options_for_select(@criterion_select_options),
+                        {},
+                        { class: "form-select" }
+          %>
+        </div>
+        <div class="col-auto">
+          <%= form.submit 'Save', class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="mt-5">
     <h3>
       Opt Ins
       <small class="text-muted">(<%= @feature.feature_opt_ins.count %>)</small>
@@ -86,14 +108,39 @@
         <% @feature.feature_opt_ins.each do |feature_opt_in| %>
           <% next if feature_opt_in.new_record? %>
           <tbody>
-            <tr>
-              <td><code><%= feature_opt_in.entity.class %></code><td>
-              <td><%= feature_opt_in.entity_name %></td>
-              <td><%= button_to 'Opt out', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+          <tr>
+            <td><code><%= feature_opt_in.entity.class %></code><td>
+            <td><%= feature_opt_in.entity_name %></td>
+            <td><%= button_to 'Opt out', [feature_opt_in.feature, feature_opt_in], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
           </tbody>
         <% end %>
       </table>
     <% end %>
   </div>
+
+  <div class="mt-5">
+    <h3>
+      Opt In Criterias
+      <small class="text-muted">(<%= @feature.feature_opt_criterions.count %>)</small>
+    </h3>
+
+    <% if @feature.feature_opt_criterions.reject(&:new_record?).empty? %>
+      <p class="lead text-muted">👌 No criteria opted in yet.</p>
+    <% else %>
+      <table class="table table-sm">
+        <% @feature.feature_opt_criterions.each do |feature_opt_criterion| %>
+          <% next if feature_opt_criterion.new_record? %>
+          <tbody>
+          <tr>
+            <td><code><%= feature_opt_criterion.entity_type %></code><td>
+            <td><%= @criterion_method_id_name_map[feature_opt_criterion.entity_type][feature_opt_criterion.entity_method.to_i] %><td>
+            <td><%= button_to 'Opt out', [feature_opt_criterion.feature, feature_opt_criterion], class: "btn btn-light btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+
 </div>

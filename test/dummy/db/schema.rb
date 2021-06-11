@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_164611) do
+ActiveRecord::Schema.define(version: 2021_06_11_134251) do
+
+  create_table "lightning_feature_opt_criterions", force: :cascade do |t|
+    t.integer "feature_id", null: false
+    t.string "entity_type", null: false
+    t.string "entity_method", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_type", "entity_method"], name: "criterion_entity_index"
+    t.index ["feature_id", "entity_type", "entity_method"], name: "criterion_uniq_index", unique: true
+  end
 
   create_table "lightning_feature_opt_ins", force: :cascade do |t|
     t.integer "feature_id", null: false

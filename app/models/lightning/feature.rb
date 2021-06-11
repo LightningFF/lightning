@@ -3,6 +3,7 @@ module Lightning
 
     enum state: { disabled: 0, enabled_globally: 1, enabled_per_entity: 2 }
     has_many :feature_opt_ins
+    has_many :feature_opt_criterions
 
     def enabled?
       !disabled?

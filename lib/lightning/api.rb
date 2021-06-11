@@ -43,7 +43,19 @@ module Lightning
     end
 
     def self.enabled?(feature_key, entity)
-      Feature.where(key: feature_key).left_outer_joins(:feature_opt_ins).where("state = ? OR (state = ? AND lightning_feature_opt_ins.entity_id = ? AND lightning_feature_opt_ins.entity_type = ?)", Feature.states[:enabled_globally], Feature.states[:enabled_per_entity], entity.id, entity.class.to_s).exists?
+      enabled_entity = Feature.where(key: feature_key).left_outer_joins(:feature_opt_ins).where("state = ? OR (state = ? AND lightning_feature_opt_ins.entity_id = ? AND lightning_feature_opt_ins.entity_type = ?)", Feature.states[:enabled_globally], Feature.states[:enabled_per_entity], entity.id, entity.class.to_s).exists?
+      # Check if the entity has any valid criteria
+      unless enabled_entity
+        entity_id_to_method_map = entity.class.new.lightning_criterions.map{|c| [c[:id], c[:method]]}.to_h
+        criterions = Feature.where(key: feature_key).left_outer_joins(:feature_opt_criterions).where("state = ? AND lightning_feature_opt_criterions.entity_type = ?", Feature.states[:enabled_per_entity], entity.class.to_s).select("lightning_feature_opt_criterions.entity_method")
+        criterions.each do |criterion|
+          method = entity_id_to_method_map[criterion.entity_method.to_i]
+          if entity.respond_to?(method) && entity.public_send(method)
+            return true
+          end
+        end
+      end
+      return enabled_entity
     end
   end
 end
